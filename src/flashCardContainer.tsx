@@ -3,30 +3,47 @@ import { InputCard } from "./inputCard";
 import { MentalCard } from "./mentalCard";
 import { MultipleChoice } from "./multipleChoiceCard";
 
+
+const flashcardTypes: string[] = ["Mental card","Input card","Multiple choice card"];
+
 export const FlashCardContainer = (): JSX.Element => {
-  const [gameType, setGameType] = React.useState("MentalCard")
+  const [gameType, setGameType] = React.useState("Mental card")
 
-function pickGame (){
 
+function setFlashcard(e: any): void{
+  console.log(e.target.value)
+  return setGameType(e.target.value)
 }
+console.log(gameType)
+
 
   return (
     <>
-    <select>
-        <option value="Mental_card" onClick={()=> setGameType("MentalCard")}>
-              Mental card
+    <select onChange={setFlashcard}>
+          {flashcardTypes.map((flashcard, index) => {
+              return (
+            <option key={index} value={flashcard}>
+              {flashcard}
             </option>
-            <option value="Input_card">
-              Input card
-            </option>
-            <option value="Multiple_choice_card">
-              Multiple choice card
-          </option>
+          )})}
     </select>
-
-     <MentalCard />
-    <InputCard />
-    <MultipleChoice />
+    <div>
+      {(() => {
+        if (gameType === flashcardTypes[0]) {
+          return (
+    <MentalCard />
+          )
+        } else if (gameType === flashcardTypes[1]) {
+          return (
+            <InputCard />
+          )
+        } else {
+          return (
+            <MultipleChoice />
+          )
+        }
+      })()}
+    </div>
     </>
   )
 }
