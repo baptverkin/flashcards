@@ -1,35 +1,18 @@
 import React from "react"
 
 type Questions = {
+  type: string;
   question: string;
   answer: string;
   answer2: string;
   answer3: string;
-
 }
 
-const mentalQuestions: Questions[] = [
-  {
-    question: "My first question",
-    answer: "Answer to my first question",
-    answer2: "Answer to my second question",
-    answer3: "Answer to my third question"
-  },
-  {
-    question: "My second question",
-    answer2: "Answer to my first question",
-    answer: "Answer to my second question",
-    answer3: "Answer to my third question"
-  },
-  {
-    question: "My third question",
-    answer2: "Answer to my first question",
-    answer3: "Answer to my second question",
-    answer: "Answer to my third question"
-  },
-]
+type MyTypedReactComponentProps = {
+  questions: Questions [];
+};
 
-export const MultipleChoice = (): JSX.Element => {
+export const MultipleChoice: React.FC<MyTypedReactComponentProps> = ({questions}) => {
   const [question, setQuestion] = React.useState("My first question")
   const [answer, setAnswer] = React.useState("Answer to my first question")
   const [answer2, setAnswer2] = React.useState("Answer to my second question")
@@ -37,16 +20,22 @@ export const MultipleChoice = (): JSX.Element => {
   const [playerAnswer, setPlayerAnswer] = React.useState("")
   const [answerFlag, setAnswerFlag] = React.useState(false)
   const [displayQuestion, setDisplayQuestion] = React.useState(true)
-
+  const [dataQuestion, setDataQuestions] = React.useState(questions)
   const [flag, setFlag] = React.useState(true)
+
+
+  function organiseData(){
+    return setDataQuestions(questions.filter((item: Questions ) => item.type === "Multiple-choice"))
+  }
+  console.log(dataQuestion);
 
   function loadQuestion (): void {
     setDisplayQuestion(true)
-    const generateRandom: number = Math.round(Math.random()*(mentalQuestions.length-1));
-    setQuestion(mentalQuestions[generateRandom].question)
-    setAnswer(mentalQuestions[generateRandom].answer)
-    setAnswer2(mentalQuestions[generateRandom].answer2)
-    setAnswer3(mentalQuestions[generateRandom].answer3)
+    const generateRandom: number = Math.round(Math.random()*(dataQuestion.length-1));
+    setQuestion(dataQuestion[generateRandom].question)
+    setAnswer(dataQuestion[generateRandom].answer)
+    setAnswer2(dataQuestion[generateRandom].answer2)
+    setAnswer3(dataQuestion[generateRandom].answer3)
     setFlag(!flag)
     setAnswerFlag(false)
   }
@@ -80,7 +69,7 @@ export const MultipleChoice = (): JSX.Element => {
       </button>
     </form>
     </>
-    : <div onClick={loadQuestion}>{answerFlag ? <p>✅ Good answer</p> : <p>❌ Wrong answer</p> }</div>}
+    : <div onClick={() => {loadQuestion(); organiseData()}}>{answerFlag ? <p>✅ Good answer</p> : <p>❌ Wrong answer</p> }</div>}
 
     </>
 

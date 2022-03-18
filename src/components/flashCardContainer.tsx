@@ -2,45 +2,45 @@ import React from "react";
 import { InputCard } from "./inputCard";
 import { MentalCard } from "./mentalCard";
 import { MultipleChoice } from "./multipleChoiceCard";
-import { Questions } from "../data/dataQuestions";
+import { questions } from "../data/dataQuestions";
+import { Salade } from "./Salade";
+import { flashcardTypes } from "../App";
 
 
-const flashcardTypes: string[] = ["Mental card","Input card","Multiple choice card"];
+type MyTypedReactComponentProps = {
+  gameType: string;
+  questionType: string;
+};
 
-export const FlashCardContainer = (): JSX.Element => {
-  const [gameType, setGameType] = React.useState("Mental card")
-
-
-function setFlashcard(e: any): void{
-  console.log(e.target.value)
-  return setGameType(e.target.value)
-}
-console.log(gameType)
-
+export const FlashCardContainer: React.FC<MyTypedReactComponentProps> = ({gameType, questionType}) => {
 
   return (
     <>
-    <select onChange={setFlashcard}>
+    {/* <select onChange={setFlashcard}>
           {flashcardTypes.map((flashcard, index) => {
               return (
             <option key={index} value={flashcard}>
               {flashcard}
             </option>
           )})}
-    </select>
+    </select> */}
     <div>
       {(() => {
         if (gameType === flashcardTypes[0]) {
           return (
-            <MentalCard questions={Questions}/>
+            <MentalCard questions={questions}/>
           )
         } else if (gameType === flashcardTypes[1]) {
           return (
-            <InputCard />
+            <InputCard questions={questions}/>
+          )
+        } else if (gameType === flashcardTypes[2]) {
+          return (
+            <MultipleChoice questions={questions}/>
           )
         } else {
           return (
-            <MultipleChoice />
+            <Salade questions={questions} questionType={questionType}/>
           )
         }
       })()}

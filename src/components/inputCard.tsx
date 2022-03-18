@@ -1,37 +1,35 @@
 import React from "react"
 
 type Questions = {
+  type: string;
   question: string;
   answer: string;
+  answer2: string;
+  answer3: string;
 }
 
-const mentalQuestions: Questions[] = [
-  {
-    question: "My first question",
-    answer: "Answer to my first question"
-  },
-  {
-    question: "My second question",
-    answer: "Answer to my second question"
-  },
-  {
-    question: "My third question",
-    answer: "Answer to my third question"
-  },
-]
+type MyTypedReactComponentProps = {
+  questions: Questions [];
+};
 
-export const InputCard = (): JSX.Element => {
+export const InputCard: React.FC<MyTypedReactComponentProps> = ({questions}) => {
   const [question, setQuestion] = React.useState("My first question")
   const [answer, setAnswer] = React.useState("Answer to my first question")
   const [playerAnswer, setPlayerAnswer] = React.useState("")
   const [answerFlag, setAnswerFlag] = React.useState(false)
   const [displayQuestion, setDisplayQuestion] = React.useState(true)
+  const [dataQuestion, setDataQuestions] = React.useState(questions)
+
+
+  function organiseData(){
+    return setDataQuestions(questions.filter((item: Questions ) => item.type === "Input"))
+  }
 
   function loadQuestion (): void {
     setDisplayQuestion(true)
-    const generateRandom: number = Math.round(Math.random()*(mentalQuestions.length-1));
-    setQuestion(mentalQuestions[generateRandom].question)
-    setAnswer(mentalQuestions[generateRandom].answer)
+    const generateRandom: number = Math.round(Math.random()*(dataQuestion.length-1));
+    setQuestion(dataQuestion[generateRandom].question)
+    setAnswer(dataQuestion[generateRandom].answer)
     setAnswerFlag(false)
   }
 
@@ -70,7 +68,7 @@ export const InputCard = (): JSX.Element => {
       </button>
     </form>
     </>
-      : <div onClick={loadQuestion}>{answerFlag ? <p>✅ Good answer</p> : <p>❌ Wrong answer</p> }</div>}
+      : <div onClick={()=> {loadQuestion(); organiseData()}}>{answerFlag ? <p>✅ Good answer</p> : <p>❌ Wrong answer</p> }</div>}
   </>
   )
 }

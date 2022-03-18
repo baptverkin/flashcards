@@ -1,10 +1,4 @@
-type MentalorInput = {
-  type: string;
-  question: string;
-  answer: string;
-}
-
-type MutipleQuestions = {
+type Questions = {
   type: string;
   question: string;
   answer: string;
@@ -12,53 +6,65 @@ type MutipleQuestions = {
   answer3: string;
 }
 
-export const Questions: (MutipleQuestions | MentalorInput) [] = [
+export const questions: Questions [] = [
   {
-    type: "mental",
+    type: "Mental",
     question: "My first question",
     answer: "Answer to my first question",
+    answer2: "",
+    answer3: "",
   },
   {
-    type: "mental",
+    type: "Mental",
     question: "My second question",
     answer: "Answer to my second question",
+    answer2: "",
+    answer3: "",
   },
   {
-    type: "mental",
+    type: "Mental",
     question: "My third question",
     answer: "Answer to my third question",
+    answer2: "",
+    answer3: "",
   },
   {
-    type: "input",
+    type: "Input",
     question: "My first question",
     answer: "Answer to my first question",
+    answer2: "",
+    answer3: "",
   },
   {
-    type: "input",
+    type: "Input",
     question: "My second question",
     answer: "Answer to my second question",
+    answer2: "",
+    answer3: "",
   },
   {
-    type: "input",
+    type: "Input",
     question: "My third question",
     answer: "Answer to my third question",
+    answer2: "",
+    answer3: "",
   },
   {
-    type: "mutliple-choice",
+    type: "Multiple-choice",
     question: "My first question",
     answer: "Answer to my first question",
     answer2: "Answer to my second question",
     answer3: "Answer to my third question"
   },
   {
-    type: "mutliple-choice",
+    type: "Multiple-choice",
     question: "My second question",
     answer2: "Answer to my first question",
     answer: "Answer to my second question",
     answer3: "Answer to my third question"
   },
   {
-    type: "mutliple-choice",
+    type: "Multiple-choice",
     question: "My third question",
     answer2: "Answer to my first question",
     answer3: "Answer to my second question",
