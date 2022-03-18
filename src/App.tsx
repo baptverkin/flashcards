@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { FlashCardContainer } from './flashCardContainer';
+import { FlashCardContainer } from './components/flashCardContainer';
 
 function App(): JSX.Element {
   return (

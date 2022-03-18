@@ -2,6 +2,7 @@ import React from "react";
 import { InputCard } from "./inputCard";
 import { MentalCard } from "./mentalCard";
 import { MultipleChoice } from "./multipleChoiceCard";
+import { Questions } from "../data/dataQuestions";
 
 
 const flashcardTypes: string[] = ["Mental card","Input card","Multiple choice card"];
@@ -31,7 +32,7 @@ console.log(gameType)
       {(() => {
         if (gameType === flashcardTypes[0]) {
           return (
-    <MentalCard />
+            <MentalCard questions={Questions}/>
           )
         } else if (gameType === flashcardTypes[1]) {
           return (
